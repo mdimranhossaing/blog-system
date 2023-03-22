@@ -14,7 +14,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+                    <h3 class="card-title">Add New <small>Post</small></h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->

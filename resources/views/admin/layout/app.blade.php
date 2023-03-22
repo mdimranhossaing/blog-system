@@ -28,6 +28,11 @@
     <!-- summernote -->
     <link rel="stylesheet" href="/admin/plugins/summernote/summernote-bs4.min.css">
 
+    <!-- toastr -->
+    <script src="/admin/plugins/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/admin/plugins/toastr/toastr.min.css">
+    <script src="/admin/plugins/toastr/toastr.min.js"></script>
+
     <!-- PAGE STYLESHEET START -->
     @yield('stylesheet')
     <!-- PAGE STYLESHEET END -->
@@ -51,7 +56,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{route('home')}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -281,7 +286,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="{{route('dashboard')}}" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -290,13 +295,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
+                                    <a href="{{route('dashboard')}}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Admin Home</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
+                                    <a href="{{route('home')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Client Home</p>
                                     </a>
@@ -409,19 +414,18 @@
                 <div class="container-fluid">
 
                     @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            {{ $message }}
-                        </div>
+                        <script>
+                            toastr.success("{{ $message }}");
+                        </script>
                     @endif
 
                     @if ($message = Session::get('error'))
-                        <div class="alert alert-danger">
-                            {{ $message }}
-                        </div>
+                        <script>
+                            toastr.error("{{ $message }}");
+                        </script>
                     @endif
 
                     @yield('content')
-
 
                 </div><!-- /.container-fluid -->
             </section>

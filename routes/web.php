@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 
 /*
@@ -15,9 +19,16 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// FORNTEND
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('blog/posts', [BlogController::class, 'index'])->name('blog.index');
+Route::get('blog/posts/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::get('blog/category/{category:slug}', [CategoryController::class, 'index'])->name('blog.category.index');
+Route::get('blog/user/{user:id}', [UserController::class, 'index'])->name('blog.user.index');
+
+// BACKEND
 
 // For Login Register
 Route::controller(LoginRegisterController::class)->group(function() {
@@ -30,4 +41,4 @@ Route::controller(LoginRegisterController::class)->group(function() {
 });
 
 // For Post
-Route::resource('posts', PostController::class);
+Route::resource('admin/posts', PostController::class);

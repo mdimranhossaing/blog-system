@@ -11,6 +11,13 @@ class Post extends Model
 
     protected $guarded = [];
 
+    protected $with = [
+        'tags',
+        'user',
+        'category',
+        'comments'
+    ];
+
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
@@ -25,5 +32,15 @@ class Post extends Model
 
     public function comments() {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function getTagIdArray() {
+        $id_array = [];
+        if(count($this->tags)) {
+            foreach($this->tags as $tag) {
+                $id_array[] = $tag->id;
+            }
+        }
+        return $id_array;
     }
 }
